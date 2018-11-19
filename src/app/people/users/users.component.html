@@ -1,0 +1,44 @@
+<div style="color: red">
+  <div class="session-content text-xs-center">
+    <div>
+      <div>ALL USERS</div>
+      <p class="mat-text-muted">Test. Here should be table of users.</p>
+    </div>
+  </div>
+</div>
+<div>
+  <mat-card>
+    <dx-data-grid
+          id="gridContainer"
+          [dataSource]="users"
+          [showBorders]="true"
+          [showRowLines]="true"
+          [allowColumnReordering]="true"
+          [hoverStateEnabled]="true"
+          [wordWrapEnabled]="true"
+          [columnHidingEnabled]="true"
+          [allowColumnResizing]="true"
+          [columnResizingMode]="'widget'">
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-pager 
+              [showPageSizeSelector]="true"
+              [allowedPageSizes]="[5, 10, 20]"
+              [showInfo]="true">
+          </dxo-pager>
+          <dxo-sorting mode="multiple"></dxo-sorting>
+          <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+          <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+          <dxo-export [enabled]="true" fileName="Users" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-group-panel [visible]="true"></dxo-group-panel>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          
+        <!-- <dxi-column dataField="firstName"></dxi-column>
+        <dxi-column dataField="lastName"></dxi-column>
+        <dxi-column dataField="address"></dxi-column>
+        <dxi-column dataField="cell"></dxi-column>
+        <dxi-column dataField="city"></dxi-column>
+        <dxi-column dataField="email"></dxi-column> -->
+    </dx-data-grid>
+  </mat-card>
+</div>
