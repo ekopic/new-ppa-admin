@@ -15,6 +15,10 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { AgmCoreModule } from '@agm/core';
+import { CalendarModule, CalendarDateFormatter, DateAdapter } from 'angular-calendar';
+//import { ScheduleComponent } from './schedule/schedule.component';
+import { CalendarDialogComponent } from './schedule/schedule.component';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import {
   MatSidenavModule,
@@ -78,7 +82,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuthLayoutComponent,
     AccordionAnchorDirective,
     AccordionLinkDirective,
-    AccordionDirective
+    AccordionDirective,
+    //ScheduleComponent,
+    //CalendarDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +99,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         deps: [HttpClient]
       }
     }),
+    /* CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }), */
     LoadingBarRouterModule,
     MatSidenavModule,
     MatCardModule,
@@ -124,6 +134,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     }
   ],
+  //entryComponents: [ CalendarDialogComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

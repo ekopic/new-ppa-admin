@@ -50,6 +50,14 @@ export const AppRoutes: Routes = [
   }]
 },
 {
+  path: '',
+  component: AdminLayoutComponent,
+  children: [{
+    path: 'schedule',
+    loadChildren: './schedule/schedule.module#ScheduleModule'
+  }]
+},
+{
   path: '**',
   redirectTo: 'session/404'
 }];
