@@ -58,6 +58,14 @@ export const AppRoutes: Routes = [
   }]
 },
 {
+  path: '',
+  component: AdminLayoutComponent,
+  children: [{
+    path: 'payments',
+    loadChildren: './payments/payments.module#PaymentsModule'
+  }]
+},
+{
   path: '**',
   redirectTo: 'session/404'
 }];
