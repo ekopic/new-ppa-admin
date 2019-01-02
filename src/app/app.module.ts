@@ -15,10 +15,6 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { AgmCoreModule } from '@agm/core';
-import { CalendarModule, CalendarDateFormatter, DateAdapter } from 'angular-calendar';
-//import { ScheduleComponent } from './schedule/schedule.component';
-import { CalendarDialogComponent } from './schedule/schedule.component';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import {
   MatSidenavModule,
@@ -32,8 +28,9 @@ import {
   MatListModule,
   MatSlideToggleModule,
   MatSelectModule,
-  MatProgressBarModule } from '@angular/material';
-import { DxDataGridModule, DxButtonModule  } from 'devextreme-angular';
+  MatProgressBarModule, 
+  MatDialogModule} from '@angular/material';
+import { DxDataGridModule, DxButtonModule, DxDateBoxModule  } from 'devextreme-angular';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {BidiModule} from '@angular/cdk/bidi';
 
@@ -58,6 +55,7 @@ import { SignUpComponent } from './user/sign-up/sign-up.component'; */
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserService } from './shared/user.service';
+import { AddNewEventPopupComponent } from './shared/dialog/dialog.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -83,6 +81,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
+    //AddNewEventPopupComponent
     //ScheduleComponent,
     //CalendarDialogComponent
   ],
@@ -121,7 +120,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DxButtonModule,
     BidiModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyB3HQ_Gk_XRt6KitPdiHQNGpVn0NDwQGMI'}),
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    DxDateBoxModule,
+    MatDialogModule
   ],
   providers: [UserService,AuthGuard,
     {

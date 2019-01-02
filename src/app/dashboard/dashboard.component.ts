@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../shared/user.service';
+import { DxChartComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,12 @@ import { UserService } from '../shared/user.service';
 })
 export class DashboardComponent implements OnInit {
   userClaims: any;
-  users: any;
+  statistics: any;
+  programRegistration: any;
+  @ViewChildren(DxChartComponent) allCharts: QueryList<DxChartComponent> //get all charts for rendering after data is ready
+  /* @ViewChild(DxChartComponent) dxchart1: DxChartComponent;
+  @ViewChild("chart2") dxchart2: DxChartComponent; */
+  //users: any;
   card1;
   card2;
   card3;
@@ -17,6 +23,11 @@ export class DashboardComponent implements OnInit {
   rows = [];
 
   chart1Data: any[] = [];
+  startDateChart1: Date;
+  endDateChart1: Date;
+  chart2Data: any[] = [];
+  startDateChart2: Date;
+  endDateChart2: Date;
 
   // project table
   fetch(cb) {
@@ -31,7 +42,7 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) { 
     this.fetch((data) => { this.rows = data; });
 
-    this.chart1Data = [{
+    /* this.chart1Data = [{
       day: "Monday",
       oranges: 3
       }, {
@@ -52,7 +63,7 @@ export class DashboardComponent implements OnInit {
       }, {
           day: "Sunday",
           oranges: 4
-      }];
+      }]; */
 
   }
 
@@ -61,11 +72,64 @@ export class DashboardComponent implements OnInit {
       this.userClaims = data;
     });
 
-    this.userService.getUsers().subscribe((data: any) => {
+    this.userService.getStatistics().subscribe((data: any) => {
+      this.statistics = data;
+    });
+
+    this.userService.getProgramRegistration().subscribe((data: any) => {
+      //debugger
+      this.programRegistration = data;
+      this.chart1Data = this.programRegistration['stats'];
+      this.chart2Data = data['stats'];
+
+      var tempPlCount = 0;
+      this.chart1Data.forEach(element => {
+        tempPlCount += element.playersCount;
+        element.fullplayersCount = tempPlCount; //add playersCount to previous value to get chart that increase
+        //and set that in new parameter fullplayersCount
+      });
+      
+
+      this.allCharts.forEach(function(chart) { //render again charts to fix width
+        chart.instance.render();  
+      })
+    });
+
+    /* this.userService.getUsers().subscribe((data: any) => {
       this.users = data;
       console.log(this.users);
-    });
+    }); */
   }
+
+  customizeTooltip(arg: any) {
+    return {
+        text: arg.argumentText + " - " + arg.valueText
+    };
+}
+
+customAggregateFunc (aggregationInfo, series) {
+  debugger
+  let dataObjects = aggregationInfo.data;
+  let result = { }; // or [ ]
+  // ...
+  // Aggregate the data objects here
+  // ...
+  return result;
+};
+
+filterChart1Data(e: any){
+  if(this.startDateChart1)
+    this.chart1Data = this.chart1Data.filter(dat => new Date(dat.date) >= new Date(this.startDateChart1)); //filter from date
+  if(this.endDateChart1)
+    this.chart1Data = this.chart1Data.filter(dat => new Date(dat.date) <= new Date(this.endDateChart1)); //filter to date
+}
+
+filterChart2Data(e: any){
+  if(this.startDateChart2)
+    this.chart2Data = this.chart2Data.filter(dat => new Date(dat.date) >= new Date(this.startDateChart2)); //filter from date
+  if(this.endDateChart2)
+    this.chart2Data = this.chart2Data.filter(dat => new Date(dat.date) <= new Date(this.endDateChart2)); //filter to date
+}
 
   Logout() {
     localStorage.removeItem('userToken');

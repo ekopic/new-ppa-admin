@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { PaymentsComponent } from './payments.component';
 import { PaymentsRoutes } from './payments.routing';
+import { DxDataGridModule, DxButtonModule } from 'devextreme-angular';
 
 @NgModule({
   imports: [
@@ -18,6 +19,8 @@ import { PaymentsRoutes } from './payments.routing';
     MatProgressBarModule,
     MatMenuModule,
     FlexLayoutModule,
+    DxDataGridModule,
+    DxButtonModule
   ],
   declarations: [ PaymentsComponent ]
 })

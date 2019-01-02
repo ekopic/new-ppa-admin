@@ -10,6 +10,8 @@ import { ProgramsRoutes } from './programs.routing';
 import { ClinicsComponent } from './clinics/clinics.component';
 import { TrainingsComponent } from './trainings/trainings.component';
 import { TryoutsComponent } from './tryouts/tryouts.component';
+import { AddNewTeamComponent } from './teams/addNewTeam.component';
+import { DxSelectBoxModule } from 'devextreme-angular';
 
 @NgModule({
   imports: [
@@ -22,13 +24,15 @@ import { TryoutsComponent } from './tryouts/tryouts.component';
     MatButtonModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DxSelectBoxModule
   ],
   declarations: [
     TeamsComponent,
     ClinicsComponent,
     TrainingsComponent,
-    TryoutsComponent
+    TryoutsComponent,
+    AddNewTeamComponent
   ]
 })
 

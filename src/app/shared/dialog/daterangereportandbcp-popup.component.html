@@ -1,0 +1,46 @@
+﻿<div fxFlex="100" fxLayout="column">
+    <h1 matDialogTitle>{{'REPORT' | translate}}</h1>
+    <br>
+    <div fxFlex="100" fxLayout="row">
+        <label fxFlex>{{ 'START_DATE' | translate }}</label>
+        <span>
+            <dx-date-box required
+                         width="100%"
+                         type="datetime"
+                         dateSerializationFormat="yyyy-MM-ddTHH:mm:ssx"
+                         displayFormat="{{_config.DateTimeFormat}}"
+                         placeholder="{{ 'START_DATE' | translate }}"
+                         name="dateFrom"
+                         pickerType="calendar"
+                         [(value)]="dateFrom">
+            </dx-date-box>
+        </span>
+    </div>
+    <div fxFlex="100" fxLayout="row">
+        <label fxFlex>{{ 'END_DATE' | translate }}</label>
+        <span>
+            <dx-date-box required
+                         width="100%"
+                         type="datetime"
+                         dateSerializationFormat="yyyy-MM-ddTHH:mm:ssx"
+                         displayFormat="{{_config.DateTimeFormat}}"
+                         placeholder="{{ 'END_DATE' | translate }}"
+                         name="dateTo"
+                         pickerType="calendar"
+                         [(value)]="dateTo">
+            </dx-date-box>
+        </span>
+    </div>
+    <div fxFlex="100">
+        <!--<label fxFlex>{{ 'BCP' | translate }}</label>-->
+        <ice-bcp-select required 
+                        [required]="true"
+                        returnPropertyName="actorcode1"
+                        placeholder="{{'BCP' | translate}}"
+                        [(ngModel)]="selectedBcp"></ice-bcp-select>
+    </div>
+    <mat-dialog-actions fxLayoutAlign="space-around">
+        <button *ngIf="dateFrom && dateTo && selectedBcp" mat-button (click)="stampajDateRangeAndBcpReport()"><mat-icon>print</mat-icon>{{ 'PRINT' | translate}}</button>
+        <button mat-button matDialogClose><mat-icon class="material-icons">cancel</mat-icon>{{ 'CANCEL' | translate}}</button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,20 @@
+<h1 matDialogTitle>{{'REPORT' | translate}}</h1>
+<br>
+<div class="mb-1">
+  <mat-form-field style="width: 100%">
+  <input placeholder="{{'SEEDNO' | translate}}"  matInput type="text" [(ngModel)]="item.seednumber" [disabled]="true">
+  </mat-form-field>
+</div>
+<div class="mb-1">
+  <mat-form-field  style="width: 100%"> 
+   <input placeholder="{{ 'GROSSMASS' | translate}}"  matInput type="text" [(ngModel)]="brutomasa"/>
+  </mat-form-field>
+</div>
+<div class="mb-1">{{'RPT_LAYOUT' | translate}}</div>
+        <mat-radio-group name="my_options" [(ngModel)]="rpt" fxLayout="column">
+          <mat-radio-button value="2">2x1</mat-radio-button>
+          <mat-radio-button value="1">1x1</mat-radio-button>
+        </mat-radio-group>	
+<mat-dialog-actions fxLayoutAlign="space-around">  <button mat-button (click)="stampajReport()"><mat-icon>print</mat-icon>{{ 'PRINT' | translate}}</button>
+  <button mat-button matDialogClose><mat-icon  class="material-icons">cancel</mat-icon>{{ 'CANCEL' | translate}}</button>
+</mat-dialog-actions>

@@ -16,28 +16,44 @@ export class UserService {
       UserName: user.UserName,
       Password: user.Password,
     }
-    var reqHeader = new HttpHeaders({'No-Auth':'True'});
-    return this.http.post(this.rootUrl + '/api/User/Register', body,{headers : reqHeader});
+    var reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+    return this.http.post(this.rootUrl + '/api/User/Register', body, { headers: reqHeader });
   }
 
   userAuthentication(userName, password) {
     debugger
     var data = {
-        username: userName,
-        password: password,
-        type: "admin"
+      username: userName,
+      password: password,
+      type: "admin"
     }
-    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json','No-Auth':'True' });
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
     return this.http.post(this.rootUrl + '/users/login', data, { headers: reqHeader });
   }
-  
-  
-  getUserClaims(){
-   return  this.http.get(this.rootUrl+'/users');
+
+
+  getUserClaims() {
+    return this.http.get(this.rootUrl + '/users');
   }
 
-  getUsers(){
-   return  this.http.get(this.rootUrl+'/users/all');
+  getUsers() {
+    return this.http.get(this.rootUrl + '/users/all');
+  }
+
+  getSchedule() {
+    return this.http.get(this.rootUrl + '/schedule/full');
+  }
+
+  getPayments() {
+    return this.http.get(this.rootUrl + '/payments/full');
+  }
+
+  getStatistics() {
+    return this.http.get(this.rootUrl + '/statistics/seasons');
+  }
+
+  getProgramRegistration() {
+    return this.http.get(this.rootUrl + '/statistics/programRegistrationsPerSeason');
   }
 
 }

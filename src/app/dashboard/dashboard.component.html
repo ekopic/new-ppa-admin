@@ -1,100 +1,103 @@
 <div fxLayout="row wrap">
-  <div fxFlex.gt-sm="33.33%" fxFlex="100">
-    <!-- fxFlex.gt-xs="50" -->
-    <mat-card>
-      <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
-        Sales Report &nbsp;
-        <span class="font-weight-bold mat-text-accent">+2,50%</span>
-        <span fxFlex></span>
-      </mat-card-subtitle>
-      <mat-card-content fxLayout="row wrap">
-        <div fxFlex="100">
-          <mat-card class="card-widget mat-teal">
-            <div mat-card-widget>
-              <div mat-card-float-icon>
-                <mat-icon>local_offer</mat-icon>
-              </div>
-              <div class="pl-0">
-                <h2 mat-card-widget-title>103</h2>
-                <p>Campaigns</p>
-              </div>
-            </div>
-          </mat-card>
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card class="card-widget mat-teal">
+      <div mat-card-widget>
+        <div mat-card-float-icon>
+          <mat-icon>local_offer</mat-icon>
         </div>
-        <div fxFlex="100">
-          <mat-card class="card-widget mat-purple">
-            <div mat-card-widget>
-              <div mat-card-float-icon>
-                <mat-icon>phone</mat-icon>
-              </div>
-              <div class="pl-0">
-                <h2 mat-card-widget-title>230</h2>
-                <p>Customers</p>
-              </div>
-            </div>
-          </mat-card>
+        <div class="pl-0">
+          <h2 mat-card-widget-title>103</h2>
+          <p>Campaigns</p>
         </div>
-        <div fxFlex="100">
-          <mat-card class="card-widget mat-red">
-            <div mat-card-widget>
-              <div mat-card-float-icon>
-                <mat-icon>notifications</mat-icon>
-              </div>
-              <div class="pl-0">
-                <h2 mat-card-widget-title>323</h2>
-                <p>Queries</p>
-              </div>
-            </div>
-          </mat-card>
-        </div>
-      </mat-card-content>
+      </div>
     </mat-card>
   </div>
-  <div fxFlex.gt-sm="33.33%" fxFlex="100">
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card class="card-widget mat-purple">
+      <div mat-card-widget>
+        <div mat-card-float-icon>
+          <mat-icon>phone</mat-icon>
+        </div>
+        <div class="pl-0">
+          <h2 mat-card-widget-title>230</h2>
+          <p>Customers</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card class="card-widget mat-red">
+      <div mat-card-widget>
+        <div mat-card-float-icon>
+          <mat-icon>notifications</mat-icon>
+        </div>
+        <div class="pl-0">
+          <h2 mat-card-widget-title>323</h2>
+          <p>Queries</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card class="card-widget mat-indigo">
+      <div mat-card-widget>
+        <div mat-card-float-icon>
+          <mat-icon>email</mat-icon>
+        </div>
+        <div class="pl-0">
+          <h2 mat-card-widget-title>870</h2>
+          <p>Opens</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+<div fxLayout="row wrap">
+  <div fxFlex.gt-sm="50" fxFlex="100">
     <mat-card>
       <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
-        Revenue &nbsp;
-        <span class="font-weight-bold mat-text-primary">+458,90</span>
-        <span fxFlex></span>
+        <label fxFlex>Start date</label>
+        <span>
+            <dx-date-box width="100%" type="date" dateSerializationFormat="yyyy-MM-dd" placeholder="Start date"
+                name="startDateChart1" pickerType="calendar" [(value)]="startDateChart1" (onValueChanged)="filterChart1Data($event)">
+            </dx-date-box>
+        </span>
+        <label fxFlex class="ml-1">End date</label>
+        <span>
+            <dx-date-box width="100%" type="date" dateSerializationFormat="yyyy-MM-dd" placeholder="End date"
+                name="endDateChart1" pickerType="calendar" [(value)]="endDateChart1" (onValueChanged)="filterChart1Data($event)">
+            </dx-date-box>
+        </span>
         <!-- <button mat-icon-button mat-button-sm [matMenuTriggerFor]="card1" aria-label="Open card menu">
             <mat-icon>more_vert</mat-icon>
           </button> -->
       </mat-card-subtitle>
-      <!-- <mat-menu #card1="matMenu" x-position="before">
-          <button mat-menu-item>
-            <mat-icon>settings</mat-icon>
-            Settings
-          </button>
-          <button mat-menu-item>
-            <mat-icon>more</mat-icon>
-            View More
-          </button>
-          <button mat-menu-item>
-            <mat-icon>notifications_off</mat-icon>
-            Disable notifications
-          </button>
-          <button mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon>
-            Remove Panel
-          </button>
-        </mat-menu> -->
       <mat-card-content>
         <dx-chart id="chart1" [dataSource]="chart1Data">
-          <dxi-series argumentField="day" valueField="oranges" name="Test" type="line" color="#ffaa66" showInLegend="false">
+          <dxi-series argumentField="date" valueField="fullplayersCount" type="line" color="#ffaa66"
+            [showInLegend]="false">
           </dxi-series>
+          <dxo-tooltip [enabled]="true" [zIndex]="1" [customizeTooltip]="customizeTooltip">
+          </dxo-tooltip>
         </dx-chart>
       </mat-card-content>
     </mat-card>
   </div>
-  <div fxFlex.gt-sm="33.33%" fxFlex="100">
+  <div fxFlex.gt-sm="50" fxFlex="100">
     <mat-card>
       <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
-        Yearly Sales &nbsp;
-        <span class="font-weight-bold mat-text-warn">-46,68</span>
-        <span fxFlex></span>
-        <!-- <button mat-icon-button mat-button-sm [matMenuTriggerFor]="card2" aria-label="Open card menu">
-            <mat-icon>more_vert</mat-icon>
-          </button> -->
+        <label fxFlex>Start date</label>
+        <span>
+            <dx-date-box width="100%" type="date" dateSerializationFormat="yyyy-MM-dd" placeholder="Start date"
+                name="startDateChart2" pickerType="calendar" [(value)]="startDateChart2" (onValueChanged)="filterChart2Data($event)">
+            </dx-date-box>
+        </span>
+        <label fxFlex class="ml-1">End date</label>
+        <span>
+            <dx-date-box width="100%" type="date" dateSerializationFormat="yyyy-MM-dd" placeholder="End date"
+                name="endDateChart2" pickerType="calendar" [(value)]="endDateChart2" (onValueChanged)="filterChart2Data($event)">
+            </dx-date-box>
+        </span>
       </mat-card-subtitle>
       <!-- <mat-menu #card2="matMenu" x-position="before">
           <button mat-menu-item>
@@ -115,9 +118,11 @@
           </button>
         </mat-menu> -->
       <mat-card-content>
-        <dx-chart id="chart2" [dataSource]="chart1Data">
-          <dxi-series argumentField="day" valueField="oranges" name="Test" type="bar" color="#ffaa66" showInLegend="false">
+        <dx-chart id="chart2" [dataSource]="chart2Data">
+          <dxi-series argumentField="date" valueField="playersCount" name="Test" type="bar" color="#ffaa66" [showInLegend]="false">
           </dxi-series>
+          <dxo-tooltip [enabled]="true" [zIndex]="1" [customizeTooltip]="customizeTooltip">
+          </dxo-tooltip>
         </dx-chart>
       </mat-card-content>
     </mat-card>
@@ -126,73 +131,75 @@
 
 <div fxLayout="row wrap">
   <div fxFlex="100">
-  <mat-card>
+    <mat-card>
       <mat-card-header class="mt-0">
-          <mat-card-title>TODAY SCHEDULE</mat-card-title>
-          
-          <!-- <mat-card-subtitle>
+        <mat-card-title>TODAY SCHEDULE</mat-card-title>
+
+        <!-- <mat-card-subtitle>
             <a>Full schedule</a>
           </mat-card-subtitle> -->
       </mat-card-header>
       <mat-card-content>
-    <div fxFlex.gt-sm="100%" fxFlex="100">
-      <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0" [rowHeight]="'auto'">
-        <ngx-datatable-column name="Project">
-          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            {{row['project']}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Due Date">
-          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            {{row['date'] | date: 'MMMM dd'}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Progress">
-          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
-      <button mat-stroked-button color="primary" (click)="goToSchedule()">Full Schedule</button>
-    </div>
-  </mat-card-content>
-  </mat-card>
-</div>
+        <div fxFlex.gt-sm="100%" fxFlex="100">
+          <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+            [rowHeight]="'auto'">
+            <ngx-datatable-column name="Project">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['project']}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Due Date">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['date'] | date: 'MMMM dd'}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Progress">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+          <button mat-stroked-button color="primary" (click)="goToSchedule()">Full Schedule</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
 
 <div fxLayout="row wrap">
-    <div fxFlex="100">
+  <div fxFlex="100">
     <mat-card>
-        <mat-card-header class="mt-0">
-            <mat-card-title>LAST PAYMENTS</mat-card-title>
-            
-            <!-- <mat-card-subtitle>
+      <mat-card-header class="mt-0">
+        <mat-card-title>LAST PAYMENTS</mat-card-title>
+
+        <!-- <mat-card-subtitle>
               <a>Full schedule</a>
             </mat-card-subtitle> -->
-        </mat-card-header>
-        <mat-card-content>
-      <div fxFlex.gt-sm="100%" fxFlex="100">
-        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0" [rowHeight]="'auto'">
-          <ngx-datatable-column name="Project">
-            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-              {{row['project']}}
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Due Date">
-            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-              {{row['date'] | date: 'MMMM dd'}}
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Progress">
-            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            </ng-template>
-          </ngx-datatable-column>
-        </ngx-datatable>
-        <button mat-stroked-button color="primary" (click)="goToPayments()">All Payments</button>
-      </div>
-    </mat-card-content>
+      </mat-card-header>
+      <mat-card-content>
+        <div fxFlex.gt-sm="100%" fxFlex="100">
+          <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+            [rowHeight]="'auto'">
+            <ngx-datatable-column name="Project">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['project']}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Due Date">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['date'] | date: 'MMMM dd'}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Progress">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+          <button mat-stroked-button color="primary" (click)="goToPayments()">All Payments</button>
+        </div>
+      </mat-card-content>
     </mat-card>
   </div>
-  </div>
+</div>
 
 <!-- <div fxLayout="row wrap">
   <div fxFlex.gt-md="100" fxFlex="100">

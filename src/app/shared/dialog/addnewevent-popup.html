@@ -1,0 +1,50 @@
+﻿<div fxFlex="100" fxLayout="column">
+    <h1 matDialogTitle>Add new Event</h1>
+    <br>
+    <div fxFlex="100" fxLayout="row">
+        <label fxFlex>Start date</label>
+
+        <span>
+            <dx-date-box required width="100%" type="datetime" dateSerializationFormat="yyyy-MM-ddTHH:mm" placeholder="Start date"
+                name="startDate" pickerType="calendar" [(value)]="startDate">
+            </dx-date-box>
+        </span>
+    </div>
+    <div fxFlex="100" fxLayout="row" class="mt-1">
+        <label fxFlex>End date</label>
+
+        <span>
+            <dx-date-box required width="100%" type="datetime" dateSerializationFormat="yyyy-MM-ddTHH:mm" placeholder="End date"
+                name="endDate" pickerType="calendar" [(value)]="endDate">
+            </dx-date-box>
+        </span>
+    </div>
+    <div fxFlex="100" fxLayout="row" class="mt-1">
+        <mat-checkbox name="recuring" color="primary" [(ngModel)]="recuring" [checked]="recuring" [labelPosition]="'before'">
+            Recuring
+        </mat-checkbox>
+    </div>
+    <div fxFlex="100" fxLayout="row" *ngIf="recuring" class="mt-1">
+            <mat-form-field>
+                    <input matInput placeholder="Weeks recuring" type="number" min="1" [(ngModel)]="weeksRecuring">
+                  </mat-form-field>
+    </div>
+    <div fxFlex="100" fxLayout="row">
+        <mat-form-field fxFlex="100">
+            <input matInput placeholder="Location" [(ngModel)]="location">
+          </mat-form-field>
+    </div>
+    <div fxFlex="100" fxLayout="row">
+        <mat-form-field fxFlex="100">
+            <input matInput placeholder="Summary" [(ngModel)]="summary">
+          </mat-form-field>
+    </div>
+    <mat-dialog-actions fxLayoutAlign="space-around">
+        <button *ngIf="startDate && endDate" mat-button (click)="addNewEvent()">
+            <mat-icon>add</mat-icon>Add
+        </button>
+        <button mat-button matDialogClose>
+            <mat-icon class="material-icons">cancel</mat-icon>CANCEL
+        </button>
+    </mat-dialog-actions>
+</div>

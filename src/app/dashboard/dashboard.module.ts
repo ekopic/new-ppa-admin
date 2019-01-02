@@ -8,7 +8,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
-import { DxChartModule } from 'devextreme-angular';
+import { DxChartModule, DxDateBoxModule, DxRangeSelectorModule } from 'devextreme-angular';
 
 @NgModule({
   imports: [
@@ -23,7 +23,9 @@ import { DxChartModule } from 'devextreme-angular';
     FlexLayoutModule,
     ChartsModule,
     NgxDatatableModule,
-    DxChartModule
+    DxChartModule,
+    DxDateBoxModule,
+    DxRangeSelectorModule
   ],
   declarations: [ DashboardComponent ]
 })
