@@ -23,9 +23,11 @@ export class DashboardComponent implements OnInit {
   rows = [];
 
   chart1Data: any[] = [];
+  chart1FullData: any[] = [];
   startDateChart1: Date;
   endDateChart1: Date;
   chart2Data: any[] = [];
+  chart2FullData: any[] = [];
   startDateChart2: Date;
   endDateChart2: Date;
 
@@ -39,7 +41,7 @@ export class DashboardComponent implements OnInit {
     req.send();
   }
 
-  constructor(private router: Router, private userService: UserService) { 
+  constructor(private router: Router, private userService: UserService) {
     this.fetch((data) => { this.rows = data; });
 
     /* this.chart1Data = [{
@@ -79,19 +81,21 @@ export class DashboardComponent implements OnInit {
     this.userService.getProgramRegistration().subscribe((data: any) => {
       //debugger
       this.programRegistration = data;
-      this.chart1Data = this.programRegistration['stats'];
-      this.chart2Data = data['stats'];
+      this.chart1FullData = this.programRegistration['stats'];
+      this.chart2FullData = data['stats'];
 
       var tempPlCount = 0;
-      this.chart1Data.forEach(element => {
+      this.chart1FullData.forEach(element => {
         tempPlCount += element.playersCount;
         element.fullplayersCount = tempPlCount; //add playersCount to previous value to get chart that increase
         //and set that in new parameter fullplayersCount
       });
-      
 
-      this.allCharts.forEach(function(chart) { //render again charts to fix width
-        chart.instance.render();  
+      this.filterChart1Data(true);
+      this.filterChart2Data(true);
+
+      this.allCharts.forEach(function (chart) { //render again charts to fix width
+        chart.instance.render();
       })
     });
 
@@ -103,45 +107,53 @@ export class DashboardComponent implements OnInit {
 
   customizeTooltip(arg: any) {
     return {
-        text: arg.argumentText + " - " + arg.valueText
+      text: arg.argumentText + " - " + arg.valueText
     };
-}
+  }
 
-customAggregateFunc (aggregationInfo, series) {
-  debugger
-  let dataObjects = aggregationInfo.data;
-  let result = { }; // or [ ]
-  // ...
-  // Aggregate the data objects here
-  // ...
-  return result;
-};
+  customAggregateFunc(aggregationInfo, series) {
+    debugger
+    let dataObjects = aggregationInfo.data;
+    let result = {}; // or [ ]
+    // ...
+    // Aggregate the data objects here
+    // ...
+    return result;
+  };
 
-filterChart1Data(e: any){
-  if(this.startDateChart1)
-    this.chart1Data = this.chart1Data.filter(dat => new Date(dat.date) >= new Date(this.startDateChart1)); //filter from date
-  if(this.endDateChart1)
-    this.chart1Data = this.chart1Data.filter(dat => new Date(dat.date) <= new Date(this.endDateChart1)); //filter to date
-}
+  filterChart1Data(initCall = false) {
+    //debugger
+    if (initCall)
+      this.chart1Data = this.chart1FullData;
+    else if (this.startDateChart1 && this.endDateChart1)
+      this.chart1Data = this.chart1FullData.filter(dat => new Date(dat.date) >= new Date(this.startDateChart1) && new Date(dat.date) <= new Date(this.endDateChart1));
+    else if (this.startDateChart1)
+      this.chart1Data = this.chart1FullData.filter(dat => new Date(dat.date) >= new Date(this.startDateChart1)); //filter from date
+    else if (this.endDateChart1)
+      this.chart1Data = this.chart1FullData.filter(dat => new Date(dat.date) <= new Date(this.endDateChart1)); //filter to date
+  }
 
-filterChart2Data(e: any){
-  if(this.startDateChart2)
-    this.chart2Data = this.chart2Data.filter(dat => new Date(dat.date) >= new Date(this.startDateChart2)); //filter from date
-  if(this.endDateChart2)
-    this.chart2Data = this.chart2Data.filter(dat => new Date(dat.date) <= new Date(this.endDateChart2)); //filter to date
-}
+  filterChart2Data(initCall = false) {
+    //debugger
+    if (initCall)
+      this.chart2Data = this.chart2FullData;
+    else if (this.startDateChart2 && this.endDateChart2)
+      this.chart2Data = this.chart2FullData.filter(dat => new Date(dat.date) >= new Date(this.startDateChart2) && new Date(dat.date) <= new Date(this.endDateChart2)); //filter from date to date
+    else if (this.startDateChart2)
+      this.chart2Data = this.chart2FullData.filter(dat => new Date(dat.date) >= new Date(this.startDateChart2)); //filter to date
+    else if (this.endDateChart2)
+      this.chart2Data = this.chart2FullData.filter(dat => new Date(dat.date) <= new Date(this.endDateChart2)); //filter to date
+  }
 
   Logout() {
     localStorage.removeItem('userToken');
     this.router.navigate(['/user/login']);
   }
 
-  goToSchedule()
-  {
+  goToSchedule() {
     this.router.navigate(['/schedule']);
   }
-  goToPayments()
-  {
+  goToPayments() {
     this.router.navigate(['/payments']);
   }
 

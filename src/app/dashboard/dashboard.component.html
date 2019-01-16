@@ -59,13 +59,13 @@
         <label fxFlex>Start date</label>
         <span>
             <dx-date-box width="100%" type="date" dateSerializationFormat="yyyy-MM-dd" placeholder="Start date"
-                name="startDateChart1" pickerType="calendar" [(value)]="startDateChart1" (onValueChanged)="filterChart1Data($event)">
+                name="startDateChart1" pickerType="calendar" [(value)]="startDateChart1" (onValueChanged)="filterChart1Data()">
             </dx-date-box>
         </span>
         <label fxFlex class="ml-1">End date</label>
         <span>
             <dx-date-box width="100%" type="date" dateSerializationFormat="yyyy-MM-dd" placeholder="End date"
-                name="endDateChart1" pickerType="calendar" [(value)]="endDateChart1" (onValueChanged)="filterChart1Data($event)">
+                name="endDateChart1" pickerType="calendar" [(value)]="endDateChart1" (onValueChanged)="filterChart1Data()">
             </dx-date-box>
         </span>
         <!-- <button mat-icon-button mat-button-sm [matMenuTriggerFor]="card1" aria-label="Open card menu">
@@ -89,13 +89,13 @@
         <label fxFlex>Start date</label>
         <span>
             <dx-date-box width="100%" type="date" dateSerializationFormat="yyyy-MM-dd" placeholder="Start date"
-                name="startDateChart2" pickerType="calendar" [(value)]="startDateChart2" (onValueChanged)="filterChart2Data($event)">
+                name="startDateChart2" pickerType="calendar" [(value)]="startDateChart2" (onValueChanged)="filterChart2Data()">
             </dx-date-box>
         </span>
         <label fxFlex class="ml-1">End date</label>
         <span>
             <dx-date-box width="100%" type="date" dateSerializationFormat="yyyy-MM-dd" placeholder="End date"
-                name="endDateChart2" pickerType="calendar" [(value)]="endDateChart2" (onValueChanged)="filterChart2Data($event)">
+                name="endDateChart2" pickerType="calendar" [(value)]="endDateChart2" (onValueChanged)="filterChart2Data()">
             </dx-date-box>
         </span>
       </mat-card-subtitle>

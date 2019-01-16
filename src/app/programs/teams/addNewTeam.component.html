@@ -10,29 +10,69 @@
       </mat-card-header>
       <mat-card-content>
         <div>
-          <form class="example-form"  fxLayout="row wrap">
+          <form class="example-form" fxLayout="row wrap">
             <mat-form-field class="example-full-width">
-              <input required matInput placeholder="Team Name" [formControl]="teamNameFormControl">
+              <input required matInput placeholder="Team Name" [formControl]="teamNameFormControl" [(ngModel)]="data.teamName">
               <mat-error *ngIf="teamNameFormControl.hasError('required')">
                 Team Name is <strong>required</strong>!
               </mat-error>
             </mat-form-field>
           </form>
-          <div fxLayout="row wrap">
-              <dx-select-box [dataSource]="selectBoxAgeGroup" [searchEnabled]="true" placeholder="Age Group" showClearButton="true"
-              fxFlex.gt-sm="50" fxFlex="100">
-              </dx-select-box>
-            </div>
-            <div fxLayout="row wrap">
-                <dx-select-box [dataSource]="clinicYesNo" [searchEnabled]="true" placeholder="Will the team include a clinic?" showClearButton="true"
-                fxFlex.gt-sm="50" fxFlex="100" class="mt-1">
-                </dx-select-box>
-                <dx-select-box [dataSource]="selectBoxAgeGroup" [searchEnabled]="true" placeholder="Clinics Age Group" showClearButton="true"
-                fxFlex.gt-sm="50" fxFlex="100" class="mt-1">
-                </dx-select-box>
-              </div>
+          <div fxLayout="row wrap" style="align-items: center">
+            <span fxFlex.gt-sm="10" fxFlex="100">Age Group* </span>
+            <dx-select-box [dataSource]="selectBoxAgeGroup" [searchEnabled]="true" placeholder="Select Age Group"
+              showClearButton="true" fxFlex.gt-sm="40" fxFlex="100" [(value)]="data.ageGroup" [isValid]="data.ageGroup">
+            </dx-select-box>
+          </div>
+          <!-- <div fxLayout="row wrap">
+            <dx-select-box [dataSource]="clinicYesNo" [searchEnabled]="true" placeholder="Will the team include a clinic?"
+              showClearButton="true" fxFlex.gt-sm="50" fxFlex="100" class="mt-1">
+            </dx-select-box>
+            <dx-select-box [dataSource]="selectBoxAgeGroup" [searchEnabled]="true" placeholder="Clinics Age Group"
+              showClearButton="true" fxFlex.gt-sm="50" fxFlex="100" class="mt-1">
+            </dx-select-box>
+          </div> -->
+          <div fxLayout="row wrap" style="align-items: center" class="mt-1">
+            <span fxFlex.gt-sm="10" fxFlex="100">Sport* </span>
+            <dx-select-box [dataSource]="selectBoxSport" [searchEnabled]="true" placeholder="Select Sport"
+              showClearButton="true" fxFlex.gt-sm="40" fxFlex="100" [(value)]="data.sport">
+            </dx-select-box>
+          </div>
+          <div fxLayout="row wrap" style="align-items: center" class="mt-1">
+            <span fxFlex.gt-sm="10" fxFlex="100">Program* </span>
+            <dx-select-box [dataSource]="selectBoxProgram" [searchEnabled]="true" placeholder="Select Program"
+              showClearButton="true" fxFlex.gt-sm="40" fxFlex="100" [(value)]="data.program">
+            </dx-select-box>
+          </div>
+          <form [formGroup]="form" class="mt-1">
+            <!-- <mat-checkbox name="season" color="primary" [(ngModel)]="data.season" [checked]="data.season" [labelPosition]="'before'">
+                  Season
+              </mat-checkbox> -->
+            <span fxFlex.gt-sm="10" fxFlex="100">Season</span>
+            <label formArrayName="seasons" *ngFor="let season of form.controls.seasons.controls; let i = index"
+              fxFlex.gt-sm="40" fxFlex="100">
+              <input type="checkbox" [formControlName]="i">
+              {{seasons[i].name}}
+            </label>
+          </form>
+          <div fxLayout="row wrap" style="align-items: center" class="mt-1">
+            <span fxFlex.gt-sm="10" fxFlex="100">Gender* </span>
+            <dx-select-box [dataSource]="selectBoxGender" [searchEnabled]="true" placeholder="Select Gender"
+              showClearButton="true" fxFlex.gt-sm="40" fxFlex="100" [(value)]="data.gender">
+            </dx-select-box>
+          </div>
+          <form class="example-form" fxLayout="row wrap" class="mt-1">
+            <mat-form-field>
+              <input required matInput placeholder="Capacity" [formControl]="capacityFormControl" [(ngModel)]="data.capacity"
+                type="number" min="1">
+              <mat-error *ngIf="capacityFormControl.hasError('required')">
+                Capacity is <strong>required</strong>!
+              </mat-error>
+            </mat-form-field>
+          </form>
         </div>
       </mat-card-content>
     </mat-card>
+    <pre>{{data | json}}</pre>
   </div>
 </div>
