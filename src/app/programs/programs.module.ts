@@ -11,7 +11,7 @@ import { ClinicsComponent } from './clinics/clinics.component';
 import { TrainingsComponent } from './trainings/trainings.component';
 import { TryoutsComponent } from './tryouts/tryouts.component';
 import { AddNewTeamComponent } from './teams/addNewTeam.component';
-import { DxSelectBoxModule } from 'devextreme-angular';
+import { DxSelectBoxModule, DxDataGridModule, DxButtonModule } from 'devextreme-angular';
 
 @NgModule({
   imports: [
@@ -25,7 +25,9 @@ import { DxSelectBoxModule } from 'devextreme-angular';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    DxSelectBoxModule
+    DxSelectBoxModule,
+    DxDataGridModule,
+    DxButtonModule
   ],
   declarations: [
     TeamsComponent,

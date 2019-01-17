@@ -40,6 +40,10 @@ export class UserService {
     return this.http.get(this.rootUrl + '/users/all');
   }
 
+  getTeams() {
+    return this.http.get(this.rootUrl + '/teams');
+  }
+
   getSchedule() {
     return this.http.get(this.rootUrl + '/schedule/full');
   }
