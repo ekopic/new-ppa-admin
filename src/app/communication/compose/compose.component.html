@@ -12,7 +12,7 @@
 <br/>
 <dx-data-grid id="gridContainer" [dataSource]="selectedSource" [showBorders]="true" [showRowLines]="true"
       [allowColumnReordering]="true" [hoverStateEnabled]="true" [wordWrapEnabled]="true" [columnHidingEnabled]="true"
-      [allowColumnResizing]="true" [columnResizingMode]="'widget'">
+      [allowColumnResizing]="true" [columnResizingMode]="'widget'" (onSelectionChanged)="setSelectedItems($event)">
       <dxo-paging [pageSize]="10"></dxo-paging>
       <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true">
       </dxo-pager>
@@ -33,4 +33,7 @@
         <dxi-column dataField="email"></dxi-column> -->
     </dx-data-grid>
 
-<!-- <pre>{{data | json}}</pre> -->
+    <br/>
+    <button mat-raised-button color="primary" (click)="sendmessage()">Send Message</button>
+
+<pre>{{data | json}}</pre>

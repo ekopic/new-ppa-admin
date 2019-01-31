@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../shared/user.service';
 import { MatSnackBar } from '@angular/material';
+import { DxDataGridComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'app-compose',
@@ -14,6 +15,7 @@ export class ComposeComponent implements OnInit {
   selectBoxGroups: any;
   data: any = {};
   selectedSource: any;
+  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
   constructor(private router: Router, private userService: UserService, private snackBar: MatSnackBar) { 
 
@@ -51,9 +53,23 @@ export class ComposeComponent implements OnInit {
     }); */
   }
 
-  /* compose()
+  setSelectedItems(gridData: any)
+    {
+      debugger
+        var selData = gridData.selectedRowsData;
+        var temp = [];
+        for (var i = 0; i < selData.length; i++) {
+            /* if (i == selData.length -1)
+                temp.push += selData[i].id;
+            else */
+                temp.push(selData[i].id);
+        }
+        this.data.selectedItems = temp;
+    }
+
+  sendmessage()
   {
-    this.router.navigate(['/communication/compose']);
-  } */
+    this.router.navigate(['/communication/sendmessage']);
+  }
 
 }

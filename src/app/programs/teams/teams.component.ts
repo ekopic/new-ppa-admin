@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../shared/user.service';
 /* import Quill from 'quill';*/
-import 'quill-emoji/dist/quill-emoji.js';
-import 'quill-emoji/dist/quill-emoji.css'; 
+/* import 'quill-emoji/dist/quill-emoji.js';
+import 'quill-emoji/dist/quill-emoji.css';  */
 
 @Component({
   selector: 'app-teams',

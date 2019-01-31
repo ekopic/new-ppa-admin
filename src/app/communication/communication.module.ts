@@ -11,6 +11,7 @@ import { CommunicationRoutes } from './communication.routing';
 //import { CommunicationComponent } from './communication.component';
 import { ComposeComponent } from './compose/compose.component';
 import { CommunicationHomeComponent } from './communicationHome/communicationHome.component';
+import { SendmailComponent } from './sendmail/sendmail.component';
 //import { CommunicationHomeComponent } from './communicationHome.component';
 
 @NgModule({
@@ -33,7 +34,8 @@ import { CommunicationHomeComponent } from './communicationHome/communicationHom
   ],
   declarations: [
     CommunicationHomeComponent,
-    ComposeComponent 
+    ComposeComponent,
+    SendmailComponent
   ]
 })
 
