@@ -32,11 +32,14 @@
               "src/assets/fonts/data-table/icons.css",
               "src/assets/styles/app.scss",
 			  "node_modules/devextreme/dist/css/dx.common.css",
-              "node_modules/devextreme/dist/css/dx.light.css"
+              "node_modules/devextreme/dist/css/dx.light.css",
+			  "node_modules/quill-emoji/dist/quill-emoji.css"
             ],
             "scripts": [
               "node_modules/hammerjs/hammer.min.js",
-              "node_modules/chart.js/dist/Chart.bundle.min.js"
+              "node_modules/chart.js/dist/Chart.bundle.min.js",
+			  "node_modules/quill/dist/quill.min.js",
+			  "node_modules/quill-emoji/dist/quill-emoji.js"
             ]
           },
           "configurations": {
@@ -85,11 +88,14 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
               "node_modules/hammerjs/hammer.min.js",
-              "node_modules/chart.js/dist/Chart.bundle.min.js"
+              "node_modules/chart.js/dist/Chart.bundle.min.js",
+			  "node_modules/quill/dist/quill.min.js",
+			  "node_modules/quill-emoji/dist/quill-emoji.js"
             ],
             "styles": [
               "node_modules/quill/dist/quill.snow.css",
               "node_modules/quill/dist/quill.bubble.css",
+			  "node_modules/quill-emoji/dist/quill-emoji.css",
               "node_modules/dragula/dist/dragula.css",
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/angular-calendar/scss/angular-calendar.scss",

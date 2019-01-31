@@ -5,6 +5,7 @@ import { SignInComponent } from './user/sign-in/sign-in.component';
 import { AuthGuard } from './auth/auth.guard';
 
 import { AdminLayoutComponent, AuthLayoutComponent } from './core';
+import { CommunicationHomeComponent } from './communication/communicationHome/communicationHome.component';
 
 export const AppRoutes: Routes = [
   {
@@ -63,6 +64,14 @@ export const AppRoutes: Routes = [
   children: [{
     path: 'payments',
     loadChildren: './payments/payments.module#PaymentsModule'
+  }]
+},
+{
+  path: '',
+  component: AdminLayoutComponent,
+  children: [{
+    path: 'communication',
+    loadChildren: './communication/communication.module#CommunicationModule'
   }]
 },
 {

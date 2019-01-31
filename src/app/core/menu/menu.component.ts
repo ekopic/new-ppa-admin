@@ -14,6 +14,12 @@ import { TranslateService } from '@ngx-translate/core';
           <span fxFlex></span>
           <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
         </a>
+        <a appAccordionToggle class="relative" [routerLink]="['/', menuitem.state, menuitem.substate]" *ngIf="menuitem.type === 'sublink'">
+          <mat-icon>{{ menuitem.icon }}</mat-icon>
+          <span>{{ menuitem.name | translate }}</span>
+          <span fxFlex></span>
+          <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+        </a>
         <a appAccordionToggle class="relative" href="{{menuitem.state}}" *ngIf="menuitem.type === 'extLink'">
           <mat-icon>{{ menuitem.icon }}</mat-icon>
           <span>{{ menuitem.name | translate }}</span>

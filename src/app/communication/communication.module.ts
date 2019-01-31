@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { MatIconModule, MatCardModule, MatInputModule, MatCheckboxModule, MatButtonModule } from '@angular/material';
+import { MatIconModule, MatCardModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { TeamsComponent } from './teams/teams.component';
-import { ProgramsRoutes } from './programs.routing';
-import { ClinicsComponent } from './clinics/clinics.component';
-import { TrainingsComponent } from './trainings/trainings.component';
-import { TryoutsComponent } from './tryouts/tryouts.component';
-import { AddNewTeamComponent } from './teams/addNewTeam.component';
 import { DxSelectBoxModule, DxDataGridModule, DxButtonModule } from 'devextreme-angular';
 import { QuillModule } from 'ngx-quill'
+import { CommunicationRoutes } from './communication.routing';
+//import { CommunicationComponent } from './communication.component';
+import { ComposeComponent } from './compose/compose.component';
+import { CommunicationHomeComponent } from './communicationHome/communicationHome.component';
+//import { CommunicationHomeComponent } from './communicationHome.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(ProgramsRoutes),
+    RouterModule.forChild(CommunicationRoutes),
     MatIconModule,
     MatCardModule,
     MatInputModule,
@@ -29,15 +28,13 @@ import { QuillModule } from 'ngx-quill'
     DxSelectBoxModule,
     DxDataGridModule,
     DxButtonModule,
-    QuillModule
+    QuillModule,
+    MatSnackBarModule
   ],
   declarations: [
-    TeamsComponent,
-    ClinicsComponent,
-    TrainingsComponent,
-    TryoutsComponent,
-    AddNewTeamComponent
+    CommunicationHomeComponent,
+    ComposeComponent 
   ]
 })
 
-export class ProgramsModule {}
+export class CommunicationModule {}

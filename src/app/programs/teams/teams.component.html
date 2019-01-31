@@ -1,40 +1,66 @@
-<div style="color: greenyellow">
+<!-- <div style="color: greenyellow">
   <div class="session-content text-xs-center">
     <div>
       <div>ALL TEAMS</div>
       <p class="mat-text-muted">Test. Here should be table of teams.</p>
     </div>
   </div>
-</div>
+</div> -->
 <button mat-stroked-button color="primary" (click)="addNewTeam()">Add Team</button>
+<!-- <quill-editor>
+<div quill-editor-toolbar>
+  <span class="ql-formats">
+    <button class="ql-bold" [title]="'Bold'"></button>
+  </span>
+  <span class="ql-formats">
+    <select class="ql-align" [title]="'Aligment'">
+      <option selected></option>
+      <option value="center"></option>
+      <option value="right"></option>
+      <option value="justify"></option>
+    </select>
+    <select class="ql-align" [title]="'Aligment2'">
+      <option selected></option>
+      <option value="center"></option>
+      <option value="right"></option>
+      <option value="justify"></option>
+    </select>
+  </span>
+</div>
+</quill-editor> -->
+<quill-editor [modules]="{ toolbar: 
+  { container: 
+    [['bold', 'italic', 'underline', 'strike'], 
+    [ 'emoji' ]], handlers: { emoji: emptyHandler } }
+    , 'emoji-toolbar': true, 'emoji-textarea': true, 'emoji-shortname': true }"></quill-editor>
 <div>
   <mat-card>
-    <dx-data-grid
-          id="gridContainer"
-          [dataSource]="teams"
-          [showBorders]="true"
-          [showRowLines]="true"
-          [allowColumnReordering]="true"
-          [hoverStateEnabled]="true"
-          [wordWrapEnabled]="true"
-          [columnHidingEnabled]="true"
-          [allowColumnResizing]="true"
-          [columnResizingMode]="'widget'">
-          <dxo-paging [pageSize]="10"></dxo-paging>
-          <dxo-pager 
-              [showPageSizeSelector]="true"
-              [allowedPageSizes]="[5, 10, 20]"
-              [showInfo]="true">
-          </dxo-pager>
-          <dxo-sorting mode="multiple"></dxo-sorting>
-          <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
-          <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
-          <dxo-export [enabled]="true" fileName="Users" [allowExportSelectedData]="true"></dxo-export>
-          <dxo-group-panel [visible]="true"></dxo-group-panel>
-          <dxo-filter-row [visible]="true"></dxo-filter-row>
-          <dxo-header-filter [visible]="true"></dxo-header-filter>
-          
-        <!-- <dxi-column dataField="firstName"></dxi-column>
+    <div fxLayout="row wrap" style="align-items: center" class="mt-1 ml-1">
+      <span fxFlex.gt-sm="10" fxFlex="100">Season </span>
+      <!-- <dx-select-box [dataSource]="seasons" [searchEnabled]="true" placeholder="Select Season"
+            showClearButton="true" fxFlex.gt-sm="40" fxFlex="100">
+          </dx-select-box> -->
+      <dx-select-box [dataSource]="seasons" displayExpr="name" valueExpr="name" [searchEnabled]="true" searchExpr='name'
+        placeholder="Select Season" [(ngModel)]="selectedSeason" name="selectedSeason" showClearButton="true" hint="Select Season">
+        <!-- (onClosed)="seasonChange()" -->
+      </dx-select-box>
+    </div>
+    <dx-data-grid id="gridContainer" [dataSource]="teams" [showBorders]="true" [showRowLines]="true"
+      [allowColumnReordering]="true" [hoverStateEnabled]="true" [wordWrapEnabled]="true" [columnHidingEnabled]="true"
+      [allowColumnResizing]="true" [columnResizingMode]="'widget'">
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true">
+      </dxo-pager>
+      <dxo-selection mode="multiple"></dxo-selection>
+      <dxo-sorting mode="multiple"></dxo-sorting>
+      <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+      <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+      <dxo-export [enabled]="true" fileName="Users" [allowExportSelectedData]="true"></dxo-export>
+      <dxo-group-panel [visible]="true"></dxo-group-panel>
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
+      <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+      <!-- <dxi-column dataField="firstName"></dxi-column>
         <dxi-column dataField="lastName"></dxi-column>
         <dxi-column dataField="address"></dxi-column>
         <dxi-column dataField="cell"></dxi-column>

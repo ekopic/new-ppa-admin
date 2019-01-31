@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Response } from "@angular/http";
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Response, RequestOptions } from "@angular/http";
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from './user.model';
@@ -58,6 +58,25 @@ export class UserService {
 
   getProgramRegistration() {
     return this.http.get(this.rootUrl + '/statistics/programRegistrationsPerSeason');
+  }
+
+  getMasterCommunications() {
+    let body = { page: 1, pageItems: 20 };
+    //let token = 'Bearer ' + this.loginSvc.GetToken();
+    //let headers = new Headers({ 'Content-Type': 'application/json'}); //'Authorization': token
+    //let options = new RequestOptions({ headers: headers });
+    
+    return this.http.post(this.rootUrl + '/admin/masterNotifications', body);
+  }
+
+  getMessageGroups() {
+    return this.http.get(this.rootUrl + '/admin/messageGroups');
+  }
+
+  getMessageGroupIDEmails(param1, param2) {
+    let body = { messageGroup: "camps", selectedItems: [95, 96] };
+
+    return this.http.post(this.rootUrl + '/admin/messageGroupIdsEmails ', body);
   }
 
 }

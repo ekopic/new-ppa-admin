@@ -65,6 +65,14 @@ const MENUITEMS = [
     icon: 'attach_money',
     children: []
   },
+  {
+    state: 'communication', //http://primer.nyasha.me/docs
+    substate: 'communicationHome',
+    name: 'Communications',
+    type: 'sublink',
+    icon: 'email',
+    children: []
+  },
 ];
 
 @Injectable()
