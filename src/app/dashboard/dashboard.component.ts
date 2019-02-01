@@ -22,6 +22,11 @@ export class DashboardComponent implements OnInit {
 
   rows = [];
 
+  numberOfUsers: any;
+  numberOfPlayers: any;
+  numberOfCoaches: any;
+  numberOfMobileUsers: any;
+
   chart1Data: any[] = [];
   chart1FullData: any[] = [];
   startDateChart1: Date;
@@ -97,6 +102,13 @@ export class DashboardComponent implements OnInit {
       this.allCharts.forEach(function (chart) { //render again charts to fix width
         chart.instance.render();
       })
+    });
+
+    this.userService.getGlobalStats().subscribe((data: any) => {
+      this.numberOfCoaches = data.coachCount;
+      this.numberOfMobileUsers = data.mobileUserCount;
+      this.numberOfPlayers = data.playerCount;
+      this.numberOfUsers = data.userCount;
     });
 
     /* this.userService.getUsers().subscribe((data: any) => {

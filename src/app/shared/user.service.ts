@@ -92,4 +92,8 @@ export class UserService {
     
   }
 
+  getGlobalStats(){
+    return this.http.get(this.rootUrl + '/admin/globalStats');
+  }
+
 }
