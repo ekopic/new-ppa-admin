@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Response, RequestOptions } from "@angular/http";
+import { Response, RequestOptions, Headers } from "@angular/http";
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from './user.model';
@@ -74,9 +74,22 @@ export class UserService {
   }
 
   getMessageGroupIDEmails(param1, param2) {
-    let body = { messageGroup: "camps", selectedItems: [95, 96] };
+    //debugger
+    let body = { messageGroup: param1, selectedItems: param2 };
 
-    return this.http.post(this.rootUrl + '/admin/messageGroupIdsEmails ', body);
+    return this.http.post(this.rootUrl + '/admin/messageGroupIdsEmails', body);
+  }
+
+  postSendNotification(data){
+    let body = data;//{ messageGroup: param1, selectedItems: param2 };
+    let token = 'Bearer ' + localStorage.getItem('userToken');
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token, 
+    'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': '*', 'Access-Control-Allow-Headers': '*' });
+    //let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': token}); //'Authorization': token
+    //let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this.rootUrl + '/admin/sendNotification', body, { headers: reqHeader });
+    
   }
 
 }

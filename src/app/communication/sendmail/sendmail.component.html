@@ -1,8 +1,31 @@
 <h1 style="text-align: center">Communications</h1>
 
 <div>
-  
-</div>
-<br/>
+  <mat-card>
+    <mat-card-content>
+      <form class="example-form" fxLayout="row wrap">
+        <mat-form-field style="width: 50%" class="pb-2">
+          <input type="email" required matInput placeholder="Message From" [formControl]="fromFormControl" [(ngModel)]="data.from">
+          <mat-error *ngIf="fromFormControl.hasError('required')">
+            Message From is <strong>required</strong>!
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <form class="example-form" fxLayout="row wrap">
+        <mat-form-field style="width: 100%" class="pb-2">
+          <input required matInput placeholder="To" [formControl]="toFormControl" [(ngModel)]="data.to">
+          <mat-error *ngIf="toFormControl.hasError('required')">
+            Field 'To' is <strong>required</strong>!
+          </mat-error>
+        </mat-form-field>
+      </form>
 
-<pre>{{data | json}}</pre>
+      <quill-editor></quill-editor>
+    </mat-card-content>
+  </mat-card>
+</div>
+<br />
+
+<!-- <pre>{{data | json}}</pre> -->
+
+<app-compose [hidden]="true" (messageEvent)="receiveMessage($event)"></app-compose>

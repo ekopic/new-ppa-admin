@@ -1,8 +1,9 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../shared/user.service';
 import { MatSnackBar } from '@angular/material';
 import { DxDataGridComponent } from 'devextreme-angular';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-compose',
@@ -10,12 +11,22 @@ import { DxDataGridComponent } from 'devextreme-angular';
   //styleUrls: ['./compose.component.scss']
 })
 export class ComposeComponent implements OnInit {
+  //temporary ------------------------
+  fromFormControl = new FormControl('', [
+    Validators.required
+    ]);
+    toFormControl = new FormControl('', [
+      Validators.required
+      ]);
+      //-------------------------------------
+
   //groups: any;
   groupIdEmails: any;
   selectBoxGroups: any;
   data: any = {};
   selectedSource: any;
   @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+  @Output() messageEvent = new EventEmitter<Object>();
 
   constructor(private router: Router, private userService: UserService, private snackBar: MatSnackBar) { 
 
@@ -25,10 +36,6 @@ export class ComposeComponent implements OnInit {
     this.userService.getMessageGroups().subscribe((data: any) => {
       this.selectBoxGroups = data;
     });
-
-    this.userService.getMessageGroupIDEmails("",[]).subscribe((data: any) => {
-      this.groupIdEmails = data;
-    })
   }
 
   groupChanged(e){
@@ -55,7 +62,7 @@ export class ComposeComponent implements OnInit {
 
   setSelectedItems(gridData: any)
     {
-      debugger
+      //debugger
         var selData = gridData.selectedRowsData;
         var temp = [];
         for (var i = 0; i < selData.length; i++) {
@@ -67,9 +74,47 @@ export class ComposeComponent implements OnInit {
         this.data.selectedItems = temp;
     }
 
-  sendmessage()
+    getEmails()
   {
-    this.router.navigate(['/communication/sendmessage']);
+    //debugger
+    this.userService.getMessageGroupIDEmails(this.data.selectedGroup, this.data.selectedItems).subscribe((data: any) => {
+      //debugger
+      this.groupIdEmails = data;
+      this.data.to = data.emails;
+      //this.messageEvent.emit(this.groupIdEmails);
+      //this.router.navigate(['/communication/sendmessage']);
+    });
+    
   }
+
+  sendEmail(){
+    //debugger
+    let dataToSend = {
+      sender : "PPA Admin",
+      notification : this.data.notification,
+      email : this.data.typeEmail,
+      pushNotification : this.data.typeNotification,
+      type : this.data.selectedGroup,
+      users : this.groupIdEmails.ids,
+      coaches : this.groupIdEmails.coachIds
+    };
+    this.userService.postSendNotification(dataToSend).subscribe((data: any) => {
+      this.snackBar.open("Notification sent!", 'Success', {
+        duration: 4000,
+      });
+    });
+  }
+
+  /* sendmessage()
+  {
+    //debugger
+    this.userService.getMessageGroupIDEmails(this.data.selectedGroup, this.data.selectedItems).subscribe((data: any) => {
+      //debugger
+      this.groupIdEmails = data;
+      //this.messageEvent.emit(this.groupIdEmails);
+      //this.router.navigate(['/communication/sendmessage']);
+    });
+    
+  } */
 
 }
